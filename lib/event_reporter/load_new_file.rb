@@ -19,7 +19,7 @@ module EventReporter
         @filename="event_attendees.csv"
       end
       default_filename = 
-          File.join(File.dirname(__FILE__),"../../bin/", @filename)
+          File.join(File.dirname(__FILE__),"../../files/", @filename)
       @contents = CSV.open(default_filename, headers: true, header_converters: :symbol )
       parse_file(@filename)
     end
