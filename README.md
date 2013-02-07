@@ -5,6 +5,8 @@ EventReporter is a CSV parser and sorter. you can load a CSV and then search it.
 ## Cloning!
 
     $ git clone 
+    
+    $ git install nokogiri
 
 ### Usage
 
