@@ -6,7 +6,7 @@ EventReporter is a CSV parser and sorter. you can load a CSV and then search it.
 
     $ gem install the_only_event_reporter_ever
 
-    $ gem list event_reporter -d
+    $ gem list the_only_event_reporter_ever -d
 
 ## Usage
 
