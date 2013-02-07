@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/event_reporter"
+
+load = EventReporter::Parser.new
+load.run
+
