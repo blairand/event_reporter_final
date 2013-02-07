@@ -14,7 +14,7 @@ module EventReporter
       elsif user_input == "load"
         puts"Loading Default File"
         @filename="event_attendees.csv"
-      else 
+      else
         puts "Bro, that is not a CSV or i cannot find the file...\n \n Loading Default File."
         @filename="event_attendees.csv"
       end

@@ -9,15 +9,13 @@ module EventReporter
       @queue = queue
       @writer_contents = ""
       if @input == "event_attendees.csv" || @input == "save"
-        puts "Saving to default_file.csv"    
+        puts "Saving to default_file.csv"
         @filename = 'default_file.csv'
-        default_filename = 
-          File.join(File.dirname(__FILE__),"../../files/default_filename.csv")
-        write_csv(default_filename)
+        default_file = File.join(File.dirname(__FILE__),"../../files/default_filename.csv")
+        write_csv(default_file)
       else
-        default_filename = 
-          File.join(File.dirname(__FILE__),"../../files/", @input)
-        parse_user_input(default_filename)
+        default_file = File.join(File.dirname(__FILE__),"../../files/", @input)
+        parse_user_input(default_file)
       end
     end
 

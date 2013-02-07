@@ -16,7 +16,7 @@ class Parser
     @contents = ""
   end
 
-def find_width
+def width
     first_name_length = [12]
     last_name_length = [12]
     email_length = []
@@ -29,9 +29,9 @@ def find_width
       city_length << person[:city].length
       street_length << person[:street].length
     end
-    width = Hash.new(0)
-    width[:first_name_ljust] = first_name_length.max
-    width[:last_name_ljust] =  last_name_length.max
+    width = Hash.new(12)
+    width[:first_ljust] = first_name_length.max
+    width[:last_ljust] =  last_name_length.max
     width[:email_ljust] = email_length.max
     width[:city_ljust] =  city_length.max
     width[:street_ljust] = street_length.max
@@ -39,9 +39,14 @@ def find_width
   end
 
 def display_queue(a,b,c,d,e)
-    puts "\n\n\n\n\n#{"LAST NAME".ljust(a," ")}|#{"FIRST NAME".ljust(b," ")}|#{"EMAIL".ljust(c," ")}|#{"ZIPCODE".ljust(10," ")}|#{"CITY".ljust(d," ")}|#{"STATE".ljust(5," ")}|#{"ADDRESS".ljust(e," ")}|#{"PHONE".ljust(13," ")}"
+    puts "\n\n\n\n\n#{"LAST NAME".ljust(a," ")}|#{"FIRST NAME".ljust(b," ")}|"+
+    "#{"EMAIL".ljust(c," ")}|#{"ZIPCODE".ljust(10," ")}|#{"CITY".ljust(d," ")}|"+
+    "#{"STATE".ljust(5," ")}|#{"ADDRESS".ljust(e," ")}|#{"PHONE".ljust(13," ")}"
      @queue.each_with_index do |person,i|
-      puts "#{person[:last_name].ljust(a," ")}|#{person[:first_name].ljust(b," ")}|#{person[:email].ljust(c," ")}|#{person[:zipcode].ljust(10," ")}|#{person[:city].ljust(d," ")}|#{person[:state].upcase.ljust(5," ")}|#{person[:street].to_s.ljust(d," ")}|#{person[:phone].ljust(13," ")}"
+      puts "#{person[:last_name].ljust(a," ")}|#{person[:first_name].ljust(b," ")}|"+
+      "#{person[:email].ljust(c," ")}|#{person[:zipcode].ljust(10," ")}|"+
+      "#{person[:city].ljust(d," ")}|#{person[:state].upcase.ljust(5," ")}|"+
+      "#{person[:street].to_s.ljust(e," ")}|#{person[:phone].ljust(13," ")}"
       if i % 10 == 0 && i != 0
         puts "Showing Matches #{i}-#{i+10} of #{@queue.length}"
         gets
@@ -50,26 +55,9 @@ def display_queue(a,b,c,d,e)
 end
 
   def queue_print(input)
-    first_name_length = [12]
-    last_name_length = [12]
-    email_length = []
-    city_length = []
-    street_length = []
-    @queue.each do |person|    
-      first_name_length << person[:first_name].length
-      last_name_length << person[:last_name].length
-      email_length << person[:email].length
-      city_length << person[:city].length
-      street_length << person[:street].length
-    end
-    first_name_ljust = first_name_length.max
-    last_name_ljust =  last_name_length.max
-    email_ljust = email_length.max
-    city_ljust =  city_length.max
-    street_ljust = street_length.max
     if input == "print"
-      display_queue(last_name_ljust , first_name_ljust , email_ljust , city_ljust , street_ljust)
-  else
+      display_queue(width[:last_ljust],width[:first_ljust],width[:email_ljust],width[:city_ljust],width[:street_ljust])
+    else
     @queue = @queue.sort_by{|person| person[input.to_sym]}
     queue_print("print")
   end
@@ -81,12 +69,9 @@ def queue(input)
   command = parts[0]
   case command
   when 'count' then puts "Found #{@queue.count} Records"
-  when 'clear' 
-    puts "Queue Cleared..."
-    @queue = []
+  when 'clear' then  puts "Queue Cleared..." && @queue = []
   when 'print' then queue_print(parts[-1])
   when 'save' then EventReporter::SaveTo.new(parts[-1],@queue)
-    # when 'save' then save_to(parts[-1],@queue)  
   else
     puts "What would you like to queue?"
   end
@@ -120,15 +105,14 @@ end
 def find(input)
   parts = input.split
   command = parts[0]
+  message = parts[1..-1].join(" ")
   case command
-  #when 'help' then puts "\n Run 'queue count' to show number of items in queue. \n Run 'queue clear' to clear the items in the queue."
-  when 'first_name' then find_first_name(parts[1..-1].join(" ")) #find first_name mary
-  when 'last_name' then find_last_name(parts[1..-1].join(" ")) #find last_name smith
-  when 'city' then find_by_city(parts[1..-1].join(" "))
-  when 'state' then find_by_state(parts[1..-1].join(" "))
-  when 'zipcode' then find_by_zip(parts[1..-1].join(" "))
-  else
-    puts "What would you like to find?"
+  when 'first_name' then find_first_name(message) #find first_name mary
+  when 'last_name' then find_last_name(message) #find last_name smith
+  when 'city' then find_by_city(message)
+  when 'state' then find_by_state(message)
+  when 'zipcode' then find_by_zip(message)
+  else puts "What would you like to find?"
   end
 end
 
@@ -137,20 +121,20 @@ def run
   command = ""
   while command != "quit"
     printf "enter command: "
-    input = gets.chomp.downcase
+    input = gets.to_s.chomp.downcase
     parts = input.split
+    message = parts[1..-1].join(" ")
     command = parts[0]
     case command
     when 'quit' then puts "Goodbye!"
-    when 'load' 
-      @queue = []
+    when 'load'
       @people = EventReporter::LoadNewFile.new(parts[-1])
       @people = @people.returner
-    when 'find' then find(parts[1..-1].join(" "))
-    when 'queue' then queue(parts[1..-1].join(" "))
-    when 'help' 
+    when 'find' then find(message)
+    when 'queue' then queue(message)
+    when 'help'
       a = EventReporter::HelpText.new
-      a.show_help(parts[1..-1].join(" "))
+      a.show_help(input)
     else
      puts "Sorry, I don't know how to #{command}."
    end
