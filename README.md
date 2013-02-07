@@ -17,6 +17,7 @@ EventReporter is a CSV parser and sorter. you can load a CSV and then search it.
 ## Usage
 
 After installation run:
+    
     $ event_reporter
 
 Then Type 'load <filename>' to load records from a CSV
