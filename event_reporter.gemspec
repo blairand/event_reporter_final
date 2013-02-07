@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["blair81@gmail.com"]
   gem.description   = File.read(File.join(File.dirname(__FILE__), 'README.md'))
   gem.summary       = "Crappy CSV Parser reads a CSV and can save it to other formats."
-  gem.homepage      = "http://blairbuilds.herokuapp.com"
+  gem.homepage      = "https://github.com/blairand/event_reporter_final"
 
   gem.files         = Dir["{bin,lib,spec}/**/*"] + %w(LICENSE.txt README.md)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

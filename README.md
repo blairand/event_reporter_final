@@ -4,21 +4,28 @@ EventReporter is a CSV parser and sorter. you can load a CSV and then search it.
 
 ## Installation
 
-    $ gem install event_reporter
+    $ gem install the_only_event_reporter_ever
 
     $ gem list event_reporter -d
 
 ## Usage
 
-run $ event_reporter
+After installation run:
+    $ event_reporter
 
-Type 'Load' to load the records from the CSV
+Then Type 'load <filename>' to load records from a CSV
 
-Type 'Find first_name sarah' to find all users with first name sarah
+    $ Load event_attendees.csv
 
-Type 'Queue Print' to see the names that were found. 
+Try these commands
 
-Type 'Queue Save to <filename>' to save the records in the queue.JSON, XML, TXT, CSV are acceptable extensions. 
+    $ Find first_name sarah
+
+    $Queue Print
+
+    $Queue Save to <filename> 
+
+### Saving the queue accepts extensions JSON, XML, TXT, CSV.
 
 ## Contributing
 
