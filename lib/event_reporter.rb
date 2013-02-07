@@ -16,13 +16,13 @@ class Parser
     @contents = ""
   end
 
-def width
+def width #column width for 'queue print'
     first_name_length = [12]
     last_name_length = [12]
     email_length = []
     city_length = []
     street_length = []
-    @queue.each do |person|    
+    @queue.each do |person|
       first_name_length << person[:first_name].length
       last_name_length << person[:last_name].length
       email_length << person[:email].length
@@ -38,15 +38,15 @@ def width
     width
   end
 
-def display_queue(a,b,c,d,e)
-    puts "\n\n\n\n\n#{"LAST NAME".ljust(a," ")}|#{"FIRST NAME".ljust(b," ")}|"+
-    "#{"EMAIL".ljust(c," ")}|#{"ZIPCODE".ljust(10," ")}|#{"CITY".ljust(d," ")}|"+
-    "#{"STATE".ljust(5," ")}|#{"ADDRESS".ljust(e," ")}|#{"PHONE".ljust(13," ")}"
+def display_queue(a,b,c,d,e) #prints the queue to the page
+    puts "\n\n#{"LAST NAME".ljust(a," ")}|#{"FIRST NAME".ljust(b," ")}|"+
+            "#{"EMAIL".ljust(c," ")}|#{"ZIPCODE".ljust(10," ")}|#{"CITY".ljust(d," ")}|"+
+            "#{"STATE".ljust(5," ")}|#{"ADDRESS".ljust(e," ")}|#{"PHONE".ljust(13," ")}"
      @queue.each_with_index do |person,i|
       puts "#{person[:last_name].ljust(a," ")}|#{person[:first_name].ljust(b," ")}|"+
-      "#{person[:email].ljust(c," ")}|#{person[:zipcode].ljust(10," ")}|"+
-      "#{person[:city].ljust(d," ")}|#{person[:state].upcase.ljust(5," ")}|"+
-      "#{person[:street].to_s.ljust(e," ")}|#{person[:phone].ljust(13," ")}"
+              "#{person[:email].ljust(c," ")}|#{person[:zipcode].ljust(10," ")}|"+
+              "#{person[:city].ljust(d," ")}|#{person[:state].upcase.ljust(5," ")}|"+
+              "#{person[:street].to_s.ljust(e," ")}|#{person[:phone].ljust(13," ")}"
       if i % 10 == 0 && i != 0
         puts "Showing Matches #{i}-#{i+10} of #{@queue.length}"
         gets
@@ -54,7 +54,7 @@ def display_queue(a,b,c,d,e)
     end
 end
 
-  def queue_print(input)
+  def queue_print(input)#prints the queue, if it needs to be sorted then it sorts the queue and then prints it.
     if input == "print"
       display_queue(width[:last_ljust],width[:first_ljust],width[:email_ljust],width[:city_ljust],width[:street_ljust])
     else
@@ -116,12 +116,11 @@ def find(input)
   end
 end
 
-
 def run
   command = ""
   while command != "quit"
     printf "enter command: "
-    input = gets.to_s.chomp.downcase
+    input = gets.chomp.to_s.downcase 
     parts = input.split
     message = parts[1..-1].join(" ")
     command = parts[0]

@@ -9,7 +9,7 @@ module EventReporter
       parts = input.split
       @command = parts[-1]
       case @command
-      when 'count' then puts "\n\n\n\n\tType 'queue count' to display the number of queued records"
+      when 'count' then puts "\n\n\n\n\tType 'queue count' to count the queued records"
       when 'clear' then puts "\n\n\n\n\tType 'queue clear' to clear the queue."
       when 'print' then puts "\n\n\n\n\tType 'queue print' to print the queue."
       else
@@ -20,13 +20,13 @@ module EventReporter
       parts = input.split
       @command = parts[0]
       case @command
-      when 'first_name' then puts "\n\n\nType 'find first_name <name>' to add records to the queue with <first_name>."
-      when 'last_name' then puts "\n\n\nType 'find last_name <name>' to add records to the queue with <last_name>."
+      when 'first_name' then puts "\n\n\nType 'find first_name <name>' to load the queue."
+      when 'last_name' then puts "\n\n\nType 'find last_name <name>' to load the queue."
       when 'city' then puts "\n\n\nType 'find city <city>'. Example 'find city salt lake city'. "
-      when 'state' then puts "\n\n\nType 'find state <state>' using the state initials. Example 'find state CO'."
+      when 'state' then puts "\n\n\nType 'find state <state>' using the state initials."
       when 'zipcode' then puts "\n\n\nType 'find zipcode <zipcode>' to find records by zipcode."
       else
-        puts "Enter 'find <attribute> <criteria>' to load records into the Queue.\nExample: 'find first_name sarah' "
+        puts "Type 'find <attribute> <criteria>'\nExample: 'find first_name sarah' "
       end
     end
 
@@ -41,7 +41,7 @@ module EventReporter
     puts "\n\t\tEnter 'find first_name sarah' to find people named sarah."
     puts "\n\t\tType 'queue print' to print out all records in the queue."
     puts "\n\t\tType 'queue print by <attribute> to sort the data by an attribute"
-    puts "\n\t\tType 'queue save to filename' to save the queue, JSON, XML, txt and CSV are acceptable extensions."
+    puts "\n\t\tType 'queue save to filename' to save.\nJSON, XML, TXT and CSV are acceptable extensions."
   end
 
 
