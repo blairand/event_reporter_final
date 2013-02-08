@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/blairand/event_reporter_final.png)](https://codeclimate.com/github/blairand/event_reporter_final)
+
 # EventReporter
 
 EventReporter is a CSV parser and sorter. you can load a CSV and then search it. 
