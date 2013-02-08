@@ -6,9 +6,8 @@ EventReporter is a CSV parser and sorter. you can load a CSV and then search it.
 
 ## Cloning!
 
-    $ git clone 
+    $ git clone git://github.com/blairand/event_reporter_final.git
     
-    $ git install nokogiri
 
 ### Usage
 
@@ -26,15 +25,15 @@ After installation run:
 
 Then Type 'load <filename>' to load records from a CSV
 
-    $ Load event_attendees.csv
+    $ load event_attendees.csv
 
 Try these commands
 
-    $ Find first_name sarah
+    $ find first_name sarah
 
-    $Queue Print
+    $ queue Print
 
-    $Queue Save to <filename> 
+    $ queue save to <filename> 
 
 ### Saving the queue accepts extensions JSON, XML, TXT, CSV.
 
